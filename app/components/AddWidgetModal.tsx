@@ -129,14 +129,19 @@ export const AddWidgetModal: React.FC<AddWidgetModalProps> = ({ open, onOpenChan
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(next) => {
+        if (!next) {
+          resetForm();
+        }
+        onOpenChange(next);
+      }}
+    >
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
             Add New Widget
-            <Button variant="ghost" size="sm" onClick={handleClose}>
-              <X className="w-4 h-4" />
-            </Button>
           </DialogTitle>
         </DialogHeader>
         
