@@ -27,7 +27,7 @@ export const AddWidgetModal: React.FC<AddWidgetModalProps> = ({ open, onOpenChan
     loading: boolean;
     success: boolean;
     error?: string;
-    data?: any;
+    data?: unknown;
     fields: WidgetField[];
   }>({
     loading: false,
@@ -70,12 +70,12 @@ export const AddWidgetModal: React.FC<AddWidgetModalProps> = ({ open, onOpenChan
     }
   };
 
-  const extractFields = (data: any): WidgetField[] => {
+  const extractFields = (data: unknown): WidgetField[] => {
     const fields: WidgetField[] = [];
     
     if (Array.isArray(data) && data.length > 0) {
       // For array data, extract fields from first object
-      const firstItem = data[0];
+      const firstItem = data[0] as Record<string, unknown>;
       Object.keys(firstItem).forEach(key => {
         fields.push({
           name: key,
@@ -85,11 +85,12 @@ export const AddWidgetModal: React.FC<AddWidgetModalProps> = ({ open, onOpenChan
       });
     } else if (typeof data === 'object' && data !== null) {
       // For object data, extract all keys
-      Object.keys(data).forEach(key => {
+      const obj = data as Record<string, unknown>;
+      Object.keys(obj).forEach(key => {
         fields.push({
           name: key,
-          value: data[key],
-          type: typeof data[key]
+          value: obj[key],
+          type: typeof obj[key]
         });
       });
     }

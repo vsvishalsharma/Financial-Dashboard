@@ -1,4 +1,4 @@
-// File: /home/vishal/Desktop/widget-forge-app/next-app/app/layout.tsx
+// File: /home/vishal/Desktop/dashboard/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
